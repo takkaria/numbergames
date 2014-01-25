@@ -1,0 +1,25 @@
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+#sum {
+	text-align: center;
+}
+
+#sum p {
+	font-size: 40px;
+}
+
+#sum input {
+	width: 2em;
+	padding: 0.2em;
+	text-align: center;
+}
+
+#next { margin-top: 1em; font-size: 20px; }
+
+#correct, #wrong { display: none; text-align: center; }
