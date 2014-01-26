@@ -2,7 +2,12 @@ Math.random1 = function(y) {
 	return Math.floor(Math.random() * (y+1));
 }
 
-var answer;
+var state = {
+	answer: -1,
+	correct: 0,
+	wrong: 0,
+	cant_correct: true,
+};
 
 function newFlashcard() {
 	var x = Math.random1(8);
@@ -11,15 +16,21 @@ function newFlashcard() {
 	x += 10;
 	var text = x + " - " + y;
 
-	answer = x - y;
+	state.answer = x - y;
 
  	$("#question").html(text);
  	$("#answer").val("").focus();
+ 	state.cant_correct = false;
+}
+
+function updateStats() {
+	$("#stats_correct").text(state.correct);
+	$("#stats_wrong").text(state.wrong);
 }
 
 function checkAnswer() {
 	var theirs = $("#answer").val();
-	var ours = answer;
+	var ours = state.answer;
 
 	if (theirs == ours) {
 		correct();
@@ -29,16 +40,22 @@ function checkAnswer() {
 }
 
 function correct() {
-	$("#correct").show();
-	$("#wrong").hide();
+	$("#correct").show().delay(500).fadeOut(1500);
+
+	if (!state.cant_correct) state.correct++;
+	updateStats();
+
 	window.setTimeout(function() {
 		newFlashcard();
 	}, 500);
 }
 
 function wrong() {
-	$("#correct").hide();
-	$("#wrong").show();
+	$("#wrong").show().delay(500).fadeOut(1500);
+
+	state.wrong++;
+	state.cant_correct = true;
+	updateStats();
 }
 
 $(function() {

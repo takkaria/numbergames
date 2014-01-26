@@ -40,12 +40,16 @@
 
       <div class="starter-template">
         <h1>Number game</h1>
+         <div id="stats">
+           <span class="correct glyphicon glyphicon-ok-sign"></span> <span id="stats_correct">0</span>&nbsp;
+           <span class="wrong glyphicon glyphicon-remove-circle"></span> <span id="stats_wrong">0</span>
+         </div>
        </div>
 
        <div id="status">
-         <p class="lead" id="correct"><span style="color: green;" class="glyphicon glyphicon-ok-sign"></span> Correct!  Well done.</p>
+         <p class="lead" id="correct"><span class="correct glyphicon glyphicon-ok-sign"></span> Correct!  Well done.</p>
 
-         <p class="lead" id="wrong"><span style="color: red;" class="glyphicon glyphicon-remove-circle"></span> Wrong.  Try again.</p>
+         <p class="lead" id="wrong"><span class="wrong glyphicon glyphicon-remove-circle"></span> Wrong.  Try again.</p>
        </div>
 
        <div id="sum">

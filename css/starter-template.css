@@ -22,4 +22,10 @@ body {
 
 #next { margin-top: 1em; font-size: 20px; }
 
+#status { height: 40px; }
 #correct, #wrong { display: none; text-align: center; }
+
+#stats { font-size: 150%; }
+
+.correct { color: green; }
+.wrong { color: red; }
