@@ -1,5 +1,10 @@
+Math.random0 = function(y) {
+	y++;
+	return Math.floor(state.mt.random() * y);
+}
+
 Math.random1 = function(y) {
-	return Math.floor(Math.random() * (y+1));
+	return 1 + Math.floor(state.mt.random() * y);
 }
 
 var state = {
@@ -7,11 +12,23 @@ var state = {
 	correct: 0,
 	wrong: 0,
 	cant_correct: true,
+	mt: null
 };
 
+function init() {
+	state.mt = new MersenneTwister();
+};
+
+// Task: Test sums of the form (10+x) - y, where y > x.
 function newFlashcard() {
-	var x = Math.random1(8);
-	var y = x + 1 + Math.random1(8 - x);
+
+/*	var x = Math.random1(8);
+	var y = x + 1 + Math.random1(8 - x); */
+
+	// Generate y first, between 2 and 9
+	var y = 1 + Math.random1(8);
+	// Generate x, smaller than y
+	var x = Math.random0(y - 1);
 
 	x += 10;
 	var text = x + " - " + y;
@@ -53,20 +70,17 @@ function correct() {
 function wrong() {
 	$("#wrong").show().delay(500).fadeOut(1500);
 
-	state.wrong++;
+	if (!state.cant_correct) state.wrong++;
 	state.cant_correct = true;
 	updateStats();
 }
 
 $(function() {
-	$("#next").click(function() {
-		newFlashcard();
-	});
-
 	$("#answer").on("keypress", function(ev) {
 		if (ev.keyCode == 13)
 			checkAnswer();
 	});
 
+	init();
 	newFlashcard();
 });
